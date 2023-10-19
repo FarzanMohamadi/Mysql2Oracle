@@ -1,6 +1,6 @@
 <?php 
 
-define('OW_DB_TYPE', 'ORACLE'); 
+define('DB_TYPE', 'ORACLE'); 
 
 $connection = new PDO("oci:dbname=" . $dbtns . ";charset=utf8", $db_username, $db_password, array(
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -402,7 +402,7 @@ function removeAliases($sql)
 {
     //$connection = new PDO('oci:host=localhost;dbname=test', 'username', 'password');
 
-    if (OW_DB_TYPE=='ORACLE'){
+    if (DB_TYPE=='ORACLE'){
     $sql="DECLARE
     inserted_id NUMBER;
     BEGIN
@@ -413,7 +413,7 @@ function removeAliases($sql)
     $lastInsertId=0;
     $stmt = execute($sql, $params,'',$lastInsertId);
 
-    if (OW_DB_TYPE=='MYSQL')
+    if (DB_TYPE=='MYSQL')
     $lastInsertId = $connection->lastInsertId();
     $stmt->closeCursor();
     return $lastInsertId;
@@ -426,11 +426,11 @@ function removeAliases($sql)
 
     $keyDeclaration='';
     $keyAssignment='';
-    if (OW_DB_TYPE=='ORACLE')
+    if (DB_TYPE=='ORACLE')
     convertSqlForOracle($sql);
 
   
-    if (OW_DB_TYPE=='ORACLE' && $params !== null )
+    if (DB_TYPE=='ORACLE' && $params !== null )
     {
     foreach ( $params as $key => $value )
         { 
@@ -482,7 +482,7 @@ function removeAliases($sql)
             $stmt->bindValue(is_int($key) ? $key + 1 : $key, $value, $paramType);
         }
     }
-    if (OW_DB_TYPE=='ORACLE'){
+    if (DB_TYPE=='ORACLE'){
         if (preg_match('/DECLARE\s+inserted_id\s+NUMBER;/', $sql)) {
             $insertedId=0;
             $stmt->bindParam(':insertedId', $insertedId, PDO::PARAM_INT | PDO::PARAM_INPUT_OUTPUT, 8);
