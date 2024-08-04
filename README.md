@@ -12,35 +12,51 @@ To use this package, include the `MySQLToOracleConverter.php` file in your proje
 - PDO extension enabled
 - Oracle and MySQL drivers installed
 
-##Methods
+#### Methods
+
 1-convertSqlForOracle
--public static function convertSqlForOracle(string &$sql): void
+
+```php
+public static function convertSqlForOracle(string &$sql): void
+```
+
 2-execute
+
+```php
 -public static function execute(string $sql, ?array $params = null, PDO $connection): PDOStatement
+```
+
 Executes an SQL statement. If the database type is set to 'ORACLE', it first converts the SQL to Oracle-compatible syntax.
 $sql: The SQL query to execute.
 $params: Optional parameters for the query.
 $connection: The PDO connection object.
 Returns: The prepared and executed PDO statement.
+
 3-insert
--public static function insert(string $sql, ?array $params = null, PDO $connection): int
+```php
+public static function insert(string $sql, ?array $params = null, PDO $connection): int
+```
 Inserts a record into the database and returns the last insert ID.
 $sql: The SQL query to execute.
 $params: Optional parameters for the query.
 $connection: The PDO connection object.
 Returns: The last insert ID.
+
 4-removeAliases
-public static function removeAliases(string $sql): string
+```php
+public static function removeAliases(string $sql): string 
+```
 Removes aliases from the SQL query.
 $sql: The SQL query to process.
 Returns: The SQL query without aliases.
-#License
+
+### License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
-#Contributing
+### Contributing
 Feel free to fork this repository and submit pull requests. Any contributions are appreciated!
 
-#Author
+### Author
 Farzan Mohammadi
 
 
